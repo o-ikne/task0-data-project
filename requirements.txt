@@ -1,0 +1,8 @@
+numpy
+pandas
+os
+matplotlib
+seaborn
+sys
+sklearn
+codecs
