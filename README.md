@@ -16,11 +16,20 @@ The data used in this project are available [here](https://github.com/sigmorphon
 
 ## **Evaluation**
 
-### **Bag-of-words**
+### **Bag-Of-Words Approach (BOW)**
 ```
-python bag_of_words_pipeline.py train_file test_file verbose=1
+python bag_of_words.py train_file test_file verbose=1
 ```
-### **OneHot encoding**
+### **Prefix-Suffix Approach (PS)**
+```
+python prefix_suffix.py train_file test_file verbose=1
+python prefix_suffix_improved.py train_file test_file verbose=1
+```
+
+### **Root-Prefix-Suffix (RPS)**
+```
+python root_prefix_suffix.py train_file test_file verbose=1
+```
 
 
 ## **Installation**
