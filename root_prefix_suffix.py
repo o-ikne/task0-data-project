@@ -94,10 +94,10 @@ def bag_of_chars(lemmas, max_lemma, char_dict):
         
     return np.array(X_train)
     
-def get_predictions(X_test, y_pred, inv_char_dict, max_lemma_length, inv_form_pref_dict, inv_form_suff_dict):
+def get_predictions(X_test, y_pred, inv_char_dict, max_root_length, inv_form_pref_dict, inv_form_suff_dict):
     predictions = []
     for x, y in zip(X_test, y_pred):
-        root, lemma_pref, form_pref, lemma_suff, form_suff = y[:max_lemma_length], *y[max_lemma_length:]
+        root, lemma_pref, form_pref, lemma_suff, form_suff = y[:max_root_length], *y[max_root_length:]
         pref = inv_form_pref_dict[form_pref] 
         suff = inv_form_suff_dict[form_suff]
         form = pref + vect2word(root, inv_char_dict) + suff
@@ -200,7 +200,7 @@ def root_prefix_suffix(train_file, test_file, verbose=1):
 	
 	## vector to word
 	words_test = df_test['form']
-	words_prediction = get_predictions(df_test['lemma'].to_numpy(), y_pred, inv_char_dict, max_lemma_length,
+	words_prediction = get_predictions(df_test['lemma'].to_numpy(), y_pred, inv_char_dict, max_length_root,
 						inv_form_pref_dict, inv_form_suff_dict)
 
 	print(f'- The word by word accuracy          : {word_accuracy(words_prediction, words_test)}')
