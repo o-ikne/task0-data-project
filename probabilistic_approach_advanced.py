@@ -126,10 +126,10 @@ def printAccuracies(fdTrain, fdTest):
   for i in range(len(rs_t)):
     c = best_candidates_from_probabilities_advanced(ws_t[i], rs_t[i], corresp, corresp2, corresp3, dist)
     # Without taking the lemma to account
-    cbc = CharByCharAccuracy(lemma1, lemma2)
+    cbc = CharByCharAccuracy(c, fs_t[i])
     c = c.replace("-", ws_t[i])
-    acc.append(cbc[0]/cbc[1])
-    acc2.append(fs_t[i] == c2)
+    acc.append(cbc)
+    acc2.append(fs_t[i] == c)
     
   print("Char-by-char accuracy is:", np.mean(acc), ". Word-to-word on the other hand is:", np.mean(acc2))
 
