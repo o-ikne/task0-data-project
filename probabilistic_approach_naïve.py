@@ -121,19 +121,13 @@ def selectFromDict(dictio, threshold):
   ks_n = ks[ord]
   return ks_n
   
-
 def CharByCharAccuracy(lemma1, lemma2):
   """
-    An accuracy definition that resembles to some distance metrics used in NLP
+    An example to defining the distance between two lemmas
   """
-  d = 0
-  # Distance is the sum of the character-wise differences
-  for i in range(min(len(lemma1), len(lemma2))):
-    d += ord(lemma1[i]) != ord(lemma2[i])
-  lemma = lemma1 if len(lemma1) > len(lemma2) else lemma2
-  # Adding the difference
-  reste = len(lemma[i+1:])
-  return d + reste, max(len(lemma1), len(lemma2))
+  d = suffix_prefix_detection(lemma1, lemma2)
+  d = d.replace('-', '')
+  return np.mean(list(map(lambda a:1,d))+[0])/max(len(lemma1), len(lemma2))
 
 def printAccuracies(fdTrain, fdTest):
   """
@@ -151,12 +145,12 @@ def printAccuracies(fdTrain, fdTest):
   for i in range(len(rs_t)):
     c = selectMaxFromDict(best_candidates_from_probabilities_naive(rs_t[i], probs))
     # Without taking the lemma to account
-    cbc = CharByCharAccuracy(lemma1, lemma2)
+    cbc = CharByCharAccuracy(c, fs_t[i])
     c = c.replace("-", ws_t[i])
-    acc.append(cbc[0]/cbc[1])
-    acc2.append(fs_t[i] == c2)
+    acc.append(cbc)
+    acc2.append(fs_t[i] == c)
     
-  print("Char-by-char accuracy is:", np.mean(acc), ". Word-to-word on the other hand is:", np.mean(acc2))
+  print("Char-by-char accuracy is:", 1-np.mean(acc), ". Word-to-word on the other hand is:", np.mean(acc2))
 
 ##################################
 ##    UNUSED & PROBS USELESS	##
