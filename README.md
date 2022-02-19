@@ -21,11 +21,11 @@ The data used in this project are available [here](https://github.com/sigmorphon
 
 ## **Evaluation**
 
-### **Bag-Of-Words Approach (BOW)**
+### **Bag-Of-Words (BOW)**
 ```
 python bag_of_words.py train_file test_file verbose=1
 ```
-### **Prefix-Suffix Approach (PS)**
+### **Prefix-Suffix (PS)**
 ```
 python prefix_suffix.py train_file test_file verbose=1
 python prefix_suffix_improved.py train_file test_file verbose=1
